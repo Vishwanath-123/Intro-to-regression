@@ -18,9 +18,11 @@ View(main_data)
 #   plot(1:nc, wss, type = "b", xlab  =  "Number of Clusters",
 #        ylab = "Within groups sum of squares")
 # }
-
+# pdf("presentation_1/images/wssplot.pdf")
 # wssplot(main_data)
-number_of_clusters <- 6
+# dev.off()
+
+number_of_clusters <- 3
 KM <- kmeans(main_data, number_of_clusters)
 pdf("presentation_1/images/CA6.pdf")
 autoplot(KM, main_data, frame = TRUE)
