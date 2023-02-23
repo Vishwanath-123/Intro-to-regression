@@ -1,43 +1,38 @@
-install.packages("dplyr")
-install.packages("stats")
-
 library(stats)
 library(dplyr)
+library(psych)
+
 db <- read.csv("presentation_1/Country_data2.csv",  header = TRUE)
-View(db)
-dim(db)
+
 main_data <- db
 main_data["exports"] <- main_data["exports"] * main_data["gdpp"] / 100
 main_data["imports"] <- main_data["imports"] * main_data["gdpp"] / 100
 main_data["health"] <- main_data["health"] * main_data["gdpp"] / 100
-
-View(main_data)
+main_data <- select(main_data, -c(country))
 
 # Correlation
-View(cor(select(main_data, -c(country))))
-avg <- mean(cor(select(main_data, -c(country))))
+avg <- mean(cor(main_data))
 
 # PCA
-pca <- princomp(select(main_data, -c(country)), center = TRUE,   scale. = TRUE)
+pca <- principal(main_data, nfactors = 9, rotate = "none")
 pca$loadings
+th <- 5
+pc <- pca$scores[, 1:th]
+# View(head(pc, 10))
+write.csv(pc, "presentation_1/PCA.csv", row.names = FALSE)
 
-pc <- pca$scores
-View(pc)
+# View(pca$loadings)
 
-View(cor(pc))
+# View(cor(pc))
 
 summary(pca)
-th <- 4
-eigen_val <- pca$sdev^2
-eigen_val
-
 # Plotting the Eigen Values
 pdf("presentation_1/images/pca.pdf")
-plot(eigen_val, type = "o", xlab = "Number of components", ylab = "Eigen Values", col = "brown") 
-abline(h = eigen_val[th], col = "red", lty = 100)
+plot(pca$values, type = "o", xlab = "Number of components", ylab = "Eigen Values", col = "brown") 
+abline(h = pca$values[th], col = "red", lty = 100)
 dev.off()
 
-cumprop <- cumsum(eigen_val) / sum(eigen_val)
+cumprop <- cumsum(pca$values) / sum(pca$values)
 cumprop
 
 # Plotting the Cumulative Proportion
@@ -45,9 +40,4 @@ pdf("presentation_1/images/Cummulative_Proportion.pdf")
 plot(cumprop * 100,type = "b",xlab = "Number of components", ylab = "Cumulative Proportion of Variance", col = "blue")
 abline(v = th, col = "red", lty = 2)
 abline(h = cumprop[th] * 100, col = "red", lty = 2)
-dev.off()
-
-pdf("presentation_1/images/PCA.pdf")
-plot(pca,  type = "l")
-loadings(select(pca, c(1:th)))
 dev.off()
