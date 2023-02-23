@@ -1,4 +1,4 @@
-install.packages("dlypr")
+install.packages("dplyr")
 install.packages("stats")
 
 library(stats)
@@ -32,7 +32,7 @@ eigen_val <- pca$sdev^2
 eigen_val
 
 # Plotting the Eigen Values
-jpeg(file = "presentation-1/images/pca.jpeg")
+pdf("presentation_1/images/pca.pdf")
 plot(eigen_val, type = "o", xlab = "Number of components", ylab = "Eigen Values", col = "brown") 
 abline(h = eigen_val[th], col = "red", lty = 100)
 dev.off()
@@ -41,12 +41,13 @@ cumprop <- cumsum(eigen_val) / sum(eigen_val)
 cumprop
 
 # Plotting the Cumulative Proportion
-jpeg(file = "presentation-1/images/Cummulative_Proportion.jpeg")
+pdf("presentation_1/images/Cummulative_Proportion.pdf")
 plot(cumprop * 100,type = "b",xlab = "Number of components", ylab = "Cumulative Proportion of Variance", col = "blue")
 abline(v = th, col = "red", lty = 2)
 abline(h = cumprop[th] * 100, col = "red", lty = 2)
 dev.off()
 
-jpeg(file = "presentation-1/images/.jpeg")
+pdf("presentation_1/images/PCA.pdf")
 plot(pca,  type = "l")
 loadings(select(pca, c(1:th)))
+dev.off()
