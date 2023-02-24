@@ -11,17 +11,14 @@ main_data["health"] <- main_data["health"] * main_data["gdpp"] / 100
 main_data <- select(main_data, -c(country))
 
 # Correlation
-avg <- mean(cor(main_data))
+View(cor(main_data))
 
 # PCA
 pca <- principal(main_data, nfactors = 9, rotate = "none")
 pca$loadings
-th <- 5
+th <- 2
 pc <- pca$scores[, 1:th]
-# View(head(pc, 10))
-write.csv(pc, "presentation_1/PCA.csv", row.names = FALSE)
 
-# View(pca$loadings)
 
 # View(cor(pc))
 

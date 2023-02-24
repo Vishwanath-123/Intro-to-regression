@@ -9,7 +9,7 @@ library(factoextra)#extract and visualize the output of multivariate data analys
 suppressPackageStartupMessages(library(dendextend))
 
 # pdf("presentation_1/images/parallel_analysis.pdf")
-# fa.parallel(data.df[-c(1)], fa="both", n.iter=150,main="Scree plots with parallel analysis")
+fa.parallel( data.df[-c(1)], fa = "both", n.iter = 1000, main = "Scree plots with parallel analysis")
 # dev.off()
 
 df <- data.frame(data.df[c("title","PA1", "PA2")])
