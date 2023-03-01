@@ -11,7 +11,7 @@ df["imports"] <- df["imports"] * df["gdpp"] / 100
 df["health"] <- df["health"] * df["gdpp"] / 100
 main_data <- df[, -1]
 
-fa_df <- fa(main_data, nfactors = 4, rotate = "varimax", fm = "pa", sort = TRUE)
+fa_df <- fa(main_data, nfactors = 4, rotate = "varimax", fm = "pa")
 # fa_df
 fa_df_loading <- (fa_df$loadings)
 fa_df_loading

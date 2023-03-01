@@ -31,7 +31,7 @@ autoplot(KM, main_data, frame = TRUE)
 dev.off()
 
 
-# Dendogram
+# Heirarchical Clustering
 hc <- hclust(dist(main_data), method = "ward.D")
 dend_obj <- as.dendrogram(hc)
 col_obj <- color_branches(dend_obj, k = number_of_clusters)
