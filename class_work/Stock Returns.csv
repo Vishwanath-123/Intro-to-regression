@@ -1,6 +1,0 @@
-,JP Morgan,Citibank,Wells Fargo,Royal Dutch Shell,Exxon Mobil
-JP Morgan,1,0.632,0.511,0.115,0.155
-Citibank,0.632,1,0.574,0.322,0.213
-Wells Fargo,0.511,0.574,1,0.183,0.146
-Royal Dutch Shell,0.115,0.322,0.183,1,0.683
-Exxon Mobil,0.155,0.213,0.146,0.683,1
